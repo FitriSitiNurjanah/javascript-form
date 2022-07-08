@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Data</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+
+        <!-- FORM INPUTAN -->
+        <h2>Masukan Data!</h2>
+        <div class="form" id="form">
+            <div>
+                <span>Nama:</span>
+                <input type="text" id="nama" value="" placeholder="Masukan Nama" required>
+            </div>
+            <div>
+                <span>Alamat:</span>
+                <input type="text" id="alamat" value="" placeholder="Masukan Alamat" required>
+            </div>
+            <div>
+                <span>No HP</span>
+                <input type="text" id="hp" value="" placeholder="masukan no hp" required>
+            </div>
+            <div>
+                <span>Email</span>
+                <input type="email" name="email" id="pesan" value="" placeholder="masukan alamat email" required>
+            </div>
+
+            <!-- FORM CHACKBOX -->
+            <div class="checkbox">
+                <h4> Apa bahasa pemrograman yang kamu kuasai?</h4>
+                <hr>
+                <input type="checkbox" name="bahasa" value="java">Java<br>
+                <input type="checkbox" name="bahasa" value="PHP">PHP<br>
+                <input type="checkbox" name="bahasa" value="C">C<br>
+                <input type="checkbox" name="bahasa" value="JS">JS<br>
+                <input type="checkbox" name="bahasa" value="Python">Python<br>
+            </div>
+
+            <!-- SELECT -->
+            <select name="select-input" id="select-input">
+                <option value="motor">Motor</option>
+                <option value="motor">Motor</option>
+            </select>
+
+            <!-- BUTTON -->
+            <button id="btn" onclick="getValue()">Submit</button>
+
+            <!-- TABLE -->
+            <table id="customers">
+                <tr>
+                    <th>Nama</th>
+                    <th>Alamat</th>
+                    <th>No Hp</th>
+                    <th>Email</th>
+                    <th>Bahasa Yang dikuasai</th>
+                </tr>
+                <tr>
+                    <td id="name">
+                    </td>
+                    <td id="address">
+                    </td>
+                    <td id="handphone">
+                    </td>
+                    </td>
+                    <td id="gmail">
+                    </td>
+                    <td id="bhs">
+                    </td>
+            </table>
+        </div>
+    </div>
+</body>
+<script>
+    function getValue() {
+
+        var nama = document.getElementById('nama');
+        var alamat = document.getElementById('alamat');
+        var nomor = document.getElementById('hp');
+        var sms = document.getElementById('pesan');
+        var bs = document.getElementsByName('bahasa');
+
+        //CHECK
+        if (nama.value == "") {
+            return alert('nama tidak boleh kosong');
+        }
+        if (alamat.value == "") {
+            return alert('alamat tidak boleh kosong');
+        }
+        if (nomor.value == "") {
+            return alert('no handphone tidak boleh kosong');
+        }
+        if (sms.value == "") {
+            return alert('Email tidak boleh kosong');
+        }
+        if (bs.value == "") {
+            return alert('Checkbox tidak boleh kosong');
+        }
+
+        //NO HP
+
+        let contohRegexHp = /\+62+\d{10,11}$/;
+        let regexHp = new RegExp(contohRegexHp);
+        let Matched = regexHp.test(nomor.value);
+        if (!Matched) {
+            alert('pastikan yang ada masukan sesuai');
+            return false
+        }
+
+        // EMAIL
+        let string = 'celerates123@gmail.com'
+        let contohRegex = `[a-z0-9]+@[a-z]+\.[a-z]{2,3}`;
+        let regex = new RegExp(contohRegex);
+        let isMatched = regex.test(sms.value);
+        if (!isMatched) {
+            alert('pastikan yang ada masukan sesuai');
+            return false
+        }
+
+        //CHECKBOX
+        var checkbox = document.getElementsByName("bahasa");
+        var bahasa = "";
+        for (var i = 0; i < checkbox.length; i++) {
+            if (checkbox[i].checked) {
+                bahasa = bahasa + checkbox[i].value + ",";
+            }
+        }
+        if (bahasa == "") {
+            alert('chackbox tidak boleh kosong');
+            return false;
+        }
+        document.getElementById("bhs").innerHTML = bahasa.replace(/,\s*$/, "");
+
+        //nama
+        let text = document.getElementById('nama')
+        let coba = document.getElementById('name');
+        coba.innerHTML = text.value;
+
+        //alamat
+        let test = document.getElementById('alamat')
+        let cob = document.getElementById('address');
+        cob.innerHTML = test.value;
+
+        //no hp
+        let no = document.getElementById('hp')
+        let hp = document.getElementById('handphone');
+        hp.innerHTML = no.value;
+
+        //email
+        let pesan = document.getElementById('pesan')
+        let gmail = document.getElementById('gmail');
+        gmail.innerHTML = pesan.value;
+
+        //CLEAR FORM
+        nama.value = "";
+        alamat.value = "";
+        nomor.value = "";
+        sms.value = "";
+    }
+
+</script>
+
+</html>
